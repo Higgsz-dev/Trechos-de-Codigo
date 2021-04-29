@@ -1,0 +1,98 @@
+//Criando a lista Funcionario
+        List<Funcionario> funcionario;
+
+        public form_CadastrarFuncionario()
+        {
+            InitializeComponent();
+
+            funcionario = new List<Funcionario>();
+
+            //Criando cargos para serem selecionados
+            cb_cargoFunc.Items.Add("Operador de Máquinas");
+            cb_cargoFunc.Items.Add("Porteiro");
+            cb_cargoFunc.Items.Add("Manobrista");
+
+            //Criando as opção de sexo para cadastro
+            cb_sexoFunc.Items.Add("Masculino");
+            cb_sexoFunc.Items.Add("Feminino");
+            cb_sexoFunc.Items.Add("Outro");
+
+        }
+
+        private void form_CadastrarFuncionario_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        //Botão para castrar funcionario no sistema
+        private void btn_Cadstro_Click(object sender, EventArgs e)
+        {
+
+            //Conferindo se o campo nome foi preenchido
+                if (tb_nomeFunc.Text == "")
+                {
+                    MessageBox.Show("Preencha o campo NOME!");
+                    tb_nomeFunc.Focus();
+                    return;
+                }
+
+                //Conferindo se o campo telefone foi preenchido
+                if (mtb_telFunc.Text == "")
+                {
+                    MessageBox.Show("Preencha o campo TELEFONE!");
+                    mtb_telFunc.Focus();
+                    return;
+                }
+
+                //Conferindo se o campo Endereço foi preenchido
+                if (tb_enderecoFunc.Text == "")
+                {
+                    MessageBox.Show("Preencha o campo ENDEREÇO!");
+                    tb_enderecoFunc.Focus();
+                    return;
+                }
+
+                //Conferindo se o campo cpf foi preenchido
+                if (tb_cpfFunc.Text == "")
+                {
+                    MessageBox.Show("Preencha o campo CPF!");
+                    tb_cpfFunc.Focus();
+                    return;
+                }
+
+                //Conferindo se o campo cargo foi selecionado
+                if (cb_cargoFunc.Text == "")
+                {
+                    MessageBox.Show("Seleciona uma opção para o CARGO!");
+                    cb_cargoFunc.Focus();
+                    return;
+                }
+
+                foreach (Funcionario funcionario in funcionario)
+                {
+                    //Convertendo o campo do cpf para inteiro
+                    int valorCpf = Convert.ToInt32(tb_cpfFunc.Text);
+
+                    //index para verificar se CPF ja esta cadastrado
+                    int index = 0;
+
+                    if (funcionario.CpfFunc == valorCpf)
+                    {
+                        MessageBox.Show("CPF já cadastrado no sistema!");
+                    }
+                }
+
+                Funcionario f = new Funcionario();
+                f.NomeFunc = tb_nomeFunc.Text;
+                f.SexoFunc = cb_sexoFunc.SelectedItem.ToString();
+                f.TelefoneFunc = Convert.ToInt32(mtb_telFunc.Text);
+                f.EmailFunc = tb_emailFunc.Text;
+                f.EnderecoFunc = tb_enderecoFunc.Text;
+                f.CpfFunc = Convert.ToInt32(tb_cpfFunc.Text);
+                f.Cargo = cb_cargoFunc.SelectedItem.ToString();
+
+                funcionario.Add(f);
+
+                MessageBox.Show("FUNCIONARIO CADASTRADO COM SUCESSO!");
+
+        }
